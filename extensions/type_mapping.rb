@@ -1,20 +1,21 @@
 TYPE_MAPPING = {
+  'Assessment' => V1::Assessment.name,
   'Assessment::Training' => V1::AssessmentTraining.name,
   'Assessment::Mission' => V1::AssessmentMission.name,
   'Assessment::McqQuestion' => V1::AssessmentMcqQuestion.name,
   'Assessment::ScribingQuestion' => V1::AssessmentScribingQuestion.name,
   'Assessment::CodingQuestion' => V1::AssessmentCodingQuestion.name,
   'Assessment::GeneralQuestion' => V1::AssessmentGeneralQuestion.name,
+  'Assessment::Submission' => V1::AssessmentSubmission.name,
   'Assessment::Answer' => V1::AssessmentAnswer.name,
   'Assessment::McqAnswer' => V1::AssessmentMcqAnswer.name,
   'Assessment::ScribingAnswer' => V1::AssessmentScribingAnswer.name,
   'Assessment::CodingAnswer' => V1::AssessmentCodingAnswer.name,
   'Assessment::GeneralAnswer' => V1::AssessmentGeneralAnswer.name,
+  'AsmReq' => V1::AsmReq.name,
+  'Announcement' => V1::Announcement.name,
   'Achievement' => V1::Achievement.name,
   'Level' => V1::Level.name,
-  'Assessment' => V1::Assessment.name,
-  'Assessment::Submission' => V1::AssessmentSubmission.name,
-  'AsmReq' => V1::AsmReq.name,
   'Material' => V1::Material.name
 }
 
