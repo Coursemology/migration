@@ -51,7 +51,7 @@ class AssessmentProgrammingAnswerTable < BaseTable
 
   def skip_validation?
     # From the log there's no validation for these courses, skip to improve performance
-    [21, 52, 56, 253, 362].include?(course_ids[0])
+     [97, 149, 150, 253, 361, 453, 517].include?(course_ids[0])
   end
 end
 
