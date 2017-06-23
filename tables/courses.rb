@@ -32,7 +32,9 @@ class CourseTable < BaseTable
         column :creator_id do
           store.get(V1::User.table_name, old.creator_id)
         end
-        column :title
+        column :title do
+          old.title.present? ? old.title : 'Untitled'
+        end
         column :description
         column :is_publish => :published
         column :is_open => :enrollable
