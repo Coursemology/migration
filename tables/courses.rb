@@ -319,7 +319,7 @@ class CourseTable < BaseTable
     default_category = destination.assessment_categories.first
     default_category.assign_attributes(
       title: training_pref.name,
-      weight: training_pref.pos,
+      weight: training_pref.pos || 2,
 
       creator_id: store.get(V1::User.table_name, source.creator_id),
       updater_id: store.get(V1::User.table_name, source.creator_id),
@@ -330,7 +330,7 @@ class CourseTable < BaseTable
     mission_pref = source.mission_pref
     mission_category = Course::Assessment::Category.new(
       title: mission_pref.name,
-      weight: mission_pref.pos,
+      weight: mission_pref.pos || 2,
 
       creator_id: store.get(V1::User.table_name, source.creator_id),
       updater_id: store.get(V1::User.table_name, source.creator_id),
