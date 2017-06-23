@@ -224,6 +224,11 @@ module V1
       id, key = preference_items_hash[pref_item_name]
       preference_hash[id][key]
     end
+
+    # 9 out of the 438 courses have no course_preferences. The rest have all 68 of them.
+    def has_no_prefs?
+      @has_no_prefs ||= preference_hash.empty?
+    end
   end
 
   # Don't enroll creator in the course
