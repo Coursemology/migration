@@ -44,7 +44,7 @@ class CourseTable < BaseTable
 
         column :gamified do
           old.pref(:sidebar_show_gamification_elements)
-        end
+        end unless old.has_no_prefs?
 
         column :start_at do
           old.start_at || old.created_at
@@ -98,6 +98,8 @@ class CourseTable < BaseTable
 
   # Insert each CoursePreference setting into the destination course setting tree.
   def migrate_settings(source, destination)
+    return if source.has_no_prefs?
+
     # Allow each assessment category to be set independently
     training_category_id = destination.assessment_categories.find_by(title: source.training_pref.name).id.to_s
     mission_category_id = destination.assessment_categories.find_by(title: source.mission_pref.name).id.to_s
@@ -319,8 +321,8 @@ class CourseTable < BaseTable
 
       creator_id: store.get(V1::User.table_name, source.creator_id),
       updater_id: store.get(V1::User.table_name, source.creator_id),
-      created_at: training_pref.created_at,
-      updated_at: training_pref.updated_at
+      created_at: training_pref.created_at || source.created_at,
+      updated_at: training_pref.updated_at || source.updated_at
     )
 
     mission_pref = source.mission_pref
@@ -330,8 +332,8 @@ class CourseTable < BaseTable
 
       creator_id: store.get(V1::User.table_name, source.creator_id),
       updater_id: store.get(V1::User.table_name, source.creator_id),
-      created_at: mission_pref.created_at,
-      updated_at: mission_pref.updated_at
+      created_at: mission_pref.created_at || source.created_at,
+      updated_at: mission_pref.updated_at || source.updated_at
     )
 
     [default_category, mission_category].each do |cat|
