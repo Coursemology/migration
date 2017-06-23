@@ -5,7 +5,7 @@ class AssessmentProgrammingAnswerTable < BaseTable
   def migrate_batch(batch)
     batch.each do |old|
       new = ::Course::Assessment::Answer::Programming.new
-      
+
       migrate(old, new) do
         column :submission_id do
           store.get(V1::AssessmentSubmission.table_name, old.submission_id)
@@ -53,8 +53,12 @@ class AssessmentProgrammingAnswerTable < BaseTable
     # From the log there's no validation for these courses, skip to improve performance
      [97, 149, 150, 253, 361, 453, 517].include?(course_ids[0])
   end
-end
 
+  def process_in_batches?
+    # From testing, find_in_batches breaks for course 97 and 150
+    super && ![97, 150].include?(course_ids[0])
+  end
+end
 
 # Schema
 #
