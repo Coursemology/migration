@@ -15,7 +15,14 @@ class AssessmentTrqKeywordSolutionTable < BaseTable
           :keyword
         end
         column :keyword => :solution
-        column :score => :grade
+        column :grade do
+          grade = old.score
+          if grade >= 1000
+            logger.log("Invalid #{old.class} #{old.id}: grade greate than 1000, set to 999.9")
+            grade = 999.9
+          end
+          grade
+        end
 
         skip_saving_unless_valid
         

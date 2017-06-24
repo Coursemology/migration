@@ -21,7 +21,12 @@ class AssessmentTrqQuestionTable < BaseTable
           description
         end
         column :maximum_grade do
-          old.assessment_question.max_grade.to_i
+          grade = old.assessment_question.max_grade.to_i
+          if grade >= 1000
+            logger.log("Invalid #{old.class} #{old.id}: grade greate than 1000, set to 999.9")
+            grade = 999.9
+          end
+          grade
         end
         column :weight do
           old.assessment_question.question_assessments.first.position || 0
