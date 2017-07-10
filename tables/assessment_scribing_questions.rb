@@ -33,6 +33,12 @@ class AssessmentScribingQuestionTable < BaseTable
         column :updated_at
         column :created_at
 
+        # Migrate the attachment
+        if old.file_upload
+          attachment = old.file_upload.transform_attachment_reference(store, logger)
+          new.attachment = attachment if attachment
+        end
+
         skip_saving_unless_valid
 
         store.set(V1::AssessmentQuestion.table_name, old.assessment_question.id, new.acting_as.id)
