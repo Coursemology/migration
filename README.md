@@ -1,3 +1,5 @@
+Archived as migration is complete
+
 # Coursemogy Migration
 Migration script from Coursemology v1 to v2.
 
